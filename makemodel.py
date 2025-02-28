@@ -34,7 +34,7 @@ train_datagen = ImageDataGenerator(
     fill_mode='nearest'
 )
 
-# Load dataset
+# Load dataset untuk training
 train_generator = train_datagen.flow_from_directory(
     './dataset',  # Ganti dengan path dataset Anda
     target_size=(224, 224),
@@ -62,7 +62,7 @@ print(f"Steps per Epoch: {steps_per_epoch}")
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Melatih model dengan EarlyStopping
-early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
+early_stopping = EarlyStopping(monitor='loss', patience=3, restore_best_weights=True)
 history = model.fit(train_generator, steps_per_epoch=steps_per_epoch, epochs=15, callbacks=[early_stopping])  # Sesuaikan epochs sesuai kebutuhan
 
 # Menampilkan statistik hasil pelatihan
@@ -76,7 +76,6 @@ plt.figure(figsize=(12, 4))
 # Grafik Akurasi
 plt.subplot(1, 2, 1)
 plt.plot(history.history['accuracy'], label='Training')
-plt.plot(history.history['val_accuracy'], label='Validation')
 plt.title('Model Accuracy')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
@@ -85,7 +84,6 @@ plt.legend()
 # Grafik Loss
 plt.subplot(1, 2, 2)
 plt.plot(history.history['loss'], label='Training')
-plt.plot(history.history['val_loss'], label='Validation')
 plt.title('Model Loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')

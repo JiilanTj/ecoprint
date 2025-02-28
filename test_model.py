@@ -8,7 +8,7 @@ from datetime import datetime
 init(autoreset=True)
 
 # Load model yang telah dilatih
-model = load_model('model1.keras')  # Ganti dengan path model Anda jika diperlukan
+model = load_model('model.keras')  # Ganti dengan path model Anda jika diperlukan
 
 # Daftar nama kategori sesuai dengan urutan indeks
 categories = [
